@@ -61,7 +61,7 @@ class Server:
         prev_page: int = page - 1 if page > 1 else None
         next_page: int = page + 1 if end_index < len(self.__dataset) else None
         total_records: int = len(self.__dataset)
-        tota_pages: int = ceil(total_records / page_size)
+        total_pages: int = math.ceil(total_records / page_size)
         dict_hyper = {
             'page_size': page_size,
             'page': page,
