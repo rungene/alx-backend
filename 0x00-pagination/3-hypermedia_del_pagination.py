@@ -8,21 +8,6 @@ import math
 from typing import List, Tuple, Dict
 
 
-def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    """Get index rane for a given page number and page_size
-    Args:
-        page(int): page number
-        page_size(int): page size
-
-    Return:
-        tuple of size two containing a start index and an end index
-    """
-    start_index = (page) * page_size
-    end_index = start_index + page_size
-
-    return start_index, end_index
-
-
 class Server:
     """Server class to paginate a database of popular baby names.
     """
@@ -63,19 +48,22 @@ class Server:
         Return:
             a dictionary with the key-value pairs"""
 
-        start_index, end_index = index_range(index, page_size)
+        if index is None:
+            index += 0
+        next_index = index + page_size
         data = []
-        for i in range(start_index, end_index):
+        for i in range(index, next_index):
             assert 0 <= i < len(self.__indexed_dataset)
             if i in self.__indexed_dataset:
                 data.append(self.__indexed_dataset[i])
             else:
                 # Append None only when index is not in self.__indexed_dataset
                 data.append(None)
+                next_index += 1
 
         hyper_dict = {
-            'index': start_index,
-            'next_index': end_index,
+            'index': index,
+            'next_index': next_index,
             'page_size': page_size,
             'data': data
         }
