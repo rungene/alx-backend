@@ -52,11 +52,11 @@ def index() -> str:
     """
     Returns 4-index.html template
     """
-    if hasattr(g, 'user'):
+    if g.user:
         username = g.user.get('name')
-        return render_template('5-index.html', username=username)
     else:
-        return render_template('5-ndex.html', username=None)
+        username = None
+    return render_template('5-index.html', username=None)
 
 
 @babel.localeselector
