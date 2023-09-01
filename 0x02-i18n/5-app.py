@@ -56,7 +56,7 @@ def index() -> str:
         username = g.user.get('name')
         return render_template('5-index.html', username=username)
     else:
-        return render_template('5-ndex.html', username=None)
+        return render_template('5-index.html', username=None)
 
 
 @babel.localeselector
