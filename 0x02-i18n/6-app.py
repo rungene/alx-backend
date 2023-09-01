@@ -66,15 +66,11 @@ def get_locale() -> str:
         locale = request.args.get('locale')
         if locale in app.config['LANGUAGES']:
             return locale
-    if hasattr(g, 'user') and g.user.locale and \
-       g.user.locale in app.config['LANGUAGES']:
-        return g.user.locale
-    header_request = request.accept_languages \
-        .best_match(app.config['LANGUAGES'])
-    if header_request:
-        return header_request
-    return request.accept_languages \
-        .best_match(app.config['BABEL_DEFAULT_LOCALE'])
+    elif g.user:
+        locale = g.user.get('locale')
+        if locale in app.config['LANGUAGES']:
+            return locale
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 if __name__ == '__main__':
