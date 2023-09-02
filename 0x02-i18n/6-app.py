@@ -50,13 +50,13 @@ app.config.from_object(Config)
 @app.route('/', strict_slashes=False)
 def index() -> str:
     """
-    Returns 4-index.html template
+    Returns 6-index.html template
     """
     if hasattr(g, 'user'):
         username = g.user.get('name')
-        return render_template('5-index.html', username=username)
+        return render_template('6-index.html', username=username)
     else:
-        return render_template('5-index.html', username=None)
+        return render_template('6-index.html', username=None)
 
 
 @babel.localeselector
