@@ -70,7 +70,11 @@ def get_locale() -> str:
         locale = g.user.get('locale')
         if locale in app.config['LANGUAGES']:
             return locale
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    header_locale = request.accept_languages.\
+        best_match(app.config['LANGUAGES'])
+    if header_locale:
+        return header_locale
+    return app.config['BABEL_DEFAULT_LOCALE']
 
 
 if __name__ == '__main__':
