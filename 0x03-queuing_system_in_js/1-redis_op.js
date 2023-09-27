@@ -7,27 +7,29 @@ client.on('connect', () => {
 });
 
 client.on('error', (err) => {
-  console.log(`Redis client not connected to the server: ${err}`);
+  console.error(`Redis client not connected to the server: ${err}`);
 });
 
 function setNewSchool(schoolName, value) {
   client.set(schoolName, value, (error, reply) => {
     if (error) {
       console.error('Error:', error);
+    } else {
+      console.log(reply);
     }
-    client.print(reply);
+    client.quit();
   });
-  client.quit();
 }
 
 function displaySchoolValue(schoolName) {
   client.get(schoolName, (error, value) => {
     if (error) {
-      console.error('Error', error);
+      console.error('Error:', error);
+    } else {
+      console.log(value);
     }
-    console.log(value);
+    client.quit();
   });
-  client.quit();
 }
 
 displaySchoolValue('Holberton');
