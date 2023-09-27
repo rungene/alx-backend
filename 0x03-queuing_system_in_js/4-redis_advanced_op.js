@@ -12,34 +12,18 @@ client.on('connect', () => {
   console.log('Redis client connected to the server');
 });
 
-client.hset(
-  hashKey,
-  'Portland',
-  '50',
-  'Seattle',
-  '80',
-  'New York',
-  '20',
-  'Bogota',
-  '20',
-  'Cali',
-  '40',
-  'Paris',
-  '2',
-  (error, reply) => {
-    if (error) {
-      console.error(`Error ${error}`);
-    } else {
-      console.log('Reply:', reply);
-    }
+client.hset(hashKey, 'Portland', '50', redis.print);
+client.hset(hashKey, 'Seattle', '80', redis.print);
+client.hset(hashKey, 'New York', '20', redis.print);
+client.hset(hashKey, 'Bogota', '20', redis.print);
+client.hset(hashKey, 'Cali', '40', redis.print);
+client.hset(hashKey, 'Paris', '2', redis.print);
 
-    client.hgetall(hashKey, (error, hashData) => {
-      if (error) {
-        console.error(`Error ${error}`);
-      } else {
-        console.log(hashData);
-      }
-      client.quit();
-    });
+client.hgetall(hashKey, (error, hashData) => {
+  if (error) {
+    console.error(`Error ${error}`);
+  } else {
+    console.log(hashData);
   }
-);
+  client.quit();
+});
