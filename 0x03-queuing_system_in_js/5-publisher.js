@@ -9,12 +9,11 @@ client.on('error', (error) => {
 
 client.on('connect', () => {
   console.log('Redis client connected to the server');
-  client.subscribe(myChannel);
 });
 
 function publishMessage(message, time) {
   setTimeout(() => {
-    console.log('About to send MESSAGE');
+    console.log(`About to send ${message}`);
     client.publish(myChannel, message);
   }, time);
 }
