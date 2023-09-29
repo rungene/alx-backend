@@ -3,20 +3,20 @@ import kue from 'kue';
 const queue = kue.createQueue();
 const jobs = [
   {
-    phoneNumber: '4123890',
-    message: 'Please confirm your phone number',
+    phoneNumber: '4153518780',
+    message: 'This is the code to verify your account',
   },
   {
-    phoneNumber: '4123890',
-    message: 'Please confirm your phone number',
+    phoneNumber: '4153518781',
+    message: 'This is the code to verify your account',
   },
   {
-    phoneNumber: '4123890',
-    message: 'Please confirm your phone number',
+    phoneNumber: '4153518782',
+    message: 'This is the code to verify your account',
   },
 ];
 
-jobs.forEach((jobData, index) => {
+jobs.forEach((jobData) => {
   const job = queue.create('push_notification_code', jobData);
 
   job.on('complete', () => {
